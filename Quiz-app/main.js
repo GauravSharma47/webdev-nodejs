@@ -2,20 +2,28 @@ const express = require('express');
 const app = new express();
 const port = 3000;
 const mongoose = require("mongoose");
+const connection=require("./model");
+const controls=require("./controllers/controls");
+const path =require("path");
+const expressHandlebars=require("express-handlebars");
+const bodyparser=require("body-parser");
+
+app.use(bodyparser.urlencoded({
+  extended:true
+}))
 
 app.use("/static",express.static(__dirname + '/static'));
+app.use(express.urlencoded());
+app.set("views",path.join(__dirname,"/views/"));
 
-app.get('/', (req, res) => {
-    res.sendFile('./index.html', { root: __dirname });
-});
+app.engine("hbs",expressHandlebars({
+    extname:"hbs",
+    defaultLayout:"mainLayout",
+    layoutsDir:__dirname+"/views/layouts"
+}));
 
-mongoose.connect("mongodb://localhost:27017/mydb",{"useNewUrlParser":true,"useUnifiedTopology": true},(error)=>{
-  if(!error){
-    console.log("Success");
-  }
-  else{
-    console.log("error");
-  }
-})
+app.set("view engine","hbs");
+
+app.use("/",controls);
 
 app.listen(port, () => console.log(`listening on port ${port}!`));

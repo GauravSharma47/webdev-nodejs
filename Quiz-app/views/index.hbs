@@ -1,0 +1,34 @@
+<head>
+    <meta charset="utf-8">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="root">
+        <div class="question-head">
+            <form action="/next" method="POST">
+            <p class="question" id="question">{{ question }}</p>
+            <ul class="options">
+                <li>
+                    <input type="radio" name="option" value="a" checked>
+                    <label for="option1" id="a">{{a}}</label>
+                </li>
+                <li>
+                    <input type="radio" name="option" value="b">
+                    <label for="option2" id="b">{{b}}</label>
+                </li>
+                <li>
+                    <input type="radio" name="option" value="c">
+                    <label for="option3" id="c">{{c}}</label>
+                </li>
+                <li>
+                    <input type="radio" name="option" value="d">
+                    <label for="option4" id="d">{{d}}</label>
+                </li>
+            </ul>
+        </div>
+
+        <button type="submit" class="btn" id="submit">Sumbit</button>
+    </div>
+    </form>
+</body>
